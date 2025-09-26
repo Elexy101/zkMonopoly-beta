@@ -8,10 +8,10 @@ template SufficientFunds() {
     signal input xmonoPoints; // Private input: player's current claim count
     signal output isSufficient; // Output: 1 if funds >= nextRequiredSMONO, 0 otherwise
 
-    // Define base threshold: 500 SMONO
-    var BASE_THRESHOLD = 500; // Initial threshold in SMONO units
+    // Define base threshold: 250 SMONO
+    var BASE_THRESHOLD = 250; // Initial threshold in SMONO units
 
-    // Verify nextRequiredSMONO matches expected formula: 500 * (claimCount + 1)
+    // Verify nextRequiredSMONO matches expected formula: 250 * (claimCount + 1)
     signal expectedThreshold;
     expectedThreshold <== BASE_THRESHOLD * (xmonoPoints + 1);
     nextRequiredSMONO === expectedThreshold; // Constraint: ensure input threshold is correct
