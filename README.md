@@ -1,5 +1,5 @@
 # zkMonopoly: Integrated with zkVerify 
-## [Deployed on ETH SEPOLIA[0xa8B6A39e10a249aF33da173C2713e0103c3ACD7d]]
+## [Deployed on ETH SEPOLIA[0x069c11c4b12B78b5a8a0B0a5B076CAC659381759]]
 
 [![Solidity](https://img.shields.io/badge/Solidity-^0.8.19-blue.svg)](https://soliditylang.org/)
 [![zkVerify](https://img.shields.io/badge/zkVerify-Integrated-green.svg)](https://zkverify.io/)
