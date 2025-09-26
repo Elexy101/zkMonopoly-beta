@@ -27,6 +27,9 @@ zkMonopoly reimagines Monopoly as a solo, blockchain-based adventure where playe
 
 <img width="1911" height="980" alt="Screenshot from 2025-09-26 02-29-22" src="https://github.com/user-attachments/assets/a85942d2-4f1b-46c9-8661-8c5b2e2863ec" />
 
+![photo_6212917992258389745_y](https://github.com/user-attachments/assets/ad06e6a9-7b60-4d3b-b94d-6d15d6c20705)
+
+
 
 The game leverages zkVerify’s zero-knowledge proof system to verify player actions (i.e sufficient funds for claiming points) without exposing sensitive data like wallet balances. This ensures privacy, fairness, and trustless execution, making zkMonopoly a novel demonstration of ZK in gaming.
 
