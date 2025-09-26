@@ -1,4 +1,5 @@
-# zkMonopoly: Built on zkVerify [Deployed on ETH SEPOLIA[0xa8B6A39e10a249aF33da173C2713e0103c3ACD7d]]
+# zkMonopoly: Integrated with zkVerify 
+## [Deployed on ETH SEPOLIA[0xa8B6A39e10a249aF33da173C2713e0103c3ACD7d]]
 
 [![Solidity](https://img.shields.io/badge/Solidity-^0.8.19-blue.svg)](https://soliditylang.org/)
 [![zkVerify](https://img.shields.io/badge/zkVerify-Integrated-green.svg)](https://zkverify.io/)
@@ -22,7 +23,10 @@ This project showcases how ZK technology can enhance blockchain gaming by enabli
 
 ## Game Overview
 
-zkMonopoly reimagines Monopoly as a solo, blockchain-based adventure where players compete against the system to maximize XMONO points. The game operates on a 16-tile circular board, where players roll a die to move and interact with tiles that either add or subtract SMONO tokens (the in-game currency). Players can burn SMONO tokens at increasing thresholds (500, 1000, 1500, etc.) to earn XMONO points, which accumulate triangularly (1, 3, 6, 10, etc.). The total XMONO supply is capped at 5,000, with an admin able to expand it, ensuring controlled scarcity.
+zkMonopoly reimagines Monopoly as a solo, blockchain-based adventure where players compete against the system to maximize XMONO points. The game operates on a 16-tile circular board, where players roll a die to move and interact with tiles that either add or subtract SMONO tokens (the in-game currency). Players can earn SMONO tokens at increasing thresholds (250, 500, 750, etc.) to earn XMONO points, which accumulate triangularly (1, 3, 6, 10, etc.). The total XMONO supply is capped at 5,000, with an admin able to expand it, ensuring controlled scarcity.
+
+<img width="1911" height="980" alt="Screenshot from 2025-09-26 02-29-22" src="https://github.com/user-attachments/assets/a85942d2-4f1b-46c9-8661-8c5b2e2863ec" />
+
 
 The game leverages zkVerify’s zero-knowledge proof system to verify player actions (i.e sufficient funds for claiming points) without exposing sensitive data like wallet balances. This ensures privacy, fairness, and trustless execution, making zkMonopoly a novel demonstration of ZK in gaming.
 
@@ -148,7 +152,7 @@ zkMonopoly integrates with zkVerify to validate point claims privately and effic
   - Private: `funds` (player’s SMONO balance), `nextRequiredSMONO` (current threshold), `claimCount` (number of prior claims).
   - Public: `nextRequiredSMONO`, `claimCount`.
 - **Logic**:
-  - Verifies `nextRequiredSMONO == 500 * (claimCount + 1)`.
+  - Verifies `nextRequiredSMONO == 250 * (claimCount + 1)`.
   - Outputs `isSufficient` (1 if `funds >= nextRequiredSMONO`, 0 otherwise) using `GreaterEqThan(252)` from circomlib.
 - **Output**: `isSufficient` ensures the player has enough SMONO without revealing the exact balance.
 
@@ -198,7 +202,7 @@ zkMonopoly demonstrates zkVerify’s potential to revolutionize blockchain gamin
 
 ### Prerequisites
 - Node.js, Hardhat, snarkjs.
-- Access to zkVerify’s deployed contract (e.g., Sepolia testnet) [LINK](https://sepolia.etherscan.io/address/0xEA0A0f1EfB1088F4ff0Def03741Cb2C64F89361E).
+- Access to zkVerify’s deployed contract (e.g., Sepolia testnet) [LINK](https://sepolia.etherscan.io/address/0x069c11c4b12B78b5a8a0B0a5B076CAC659381759).
 - Ethereum wallet with ETH for gas.
 
 ### Steps
@@ -216,8 +220,9 @@ zkMonopoly demonstrates zkVerify’s potential to revolutionize blockchain gamin
    ```
    - Pass `zkvContract` (zkVerify contract address) and `vkHash` (from Groth16 verification key).
 4. **ZK Setup**:
-   - Compile circuit: `circom SufficientFunds.circom --r1cs --wasm --sym`.
-   - Generate ZK keys: `snarkjs groth16 setup SufficientFunds.r1cs powersOfTau28_hez_final_10.ptau SufficientFunds_0000.zkey`.
+   - Compile circuit: `circom monopoly.circom --r1cs --wasm --sym`.
+   - Generate ZK keys: `snarkjs groth16 setup monopoly.r1cs powersOfTau28_hez_final_10.ptau monopoly_0000.zkey`.
+   - Contribution: ` snarkjs zkey contribute monopoly_0000.zkey monopoly_0001.zkey --name="Contribution" -v`
    - Export `vkHash` for contract constructor.
 
 ### Sample Deploy Script
