@@ -45,7 +45,7 @@ contract SoloMonopoly {
 
     uint256 private constant INITIAL_TOKENS = 250;
     uint256 private constant BOARD_SIZE = 16;
-    uint256 private constant THRESHOLD_INCREMENT = 500;
+    uint256 private constant THRESHOLD_INCREMENT = 250;
 
     enum TileType { NEUTRAL, PROFIT, LOSS }
 
@@ -139,7 +139,7 @@ contract SoloMonopoly {
         // Validate circuit inputs
         require(input[0] == 1, "Insufficient funds");
         require(input[1] == nextRequiredSMONO[msg.sender], "Invalid nextRequiredSMONO");
-        require(input[2] == xmonoPoints[msg.sender], "Invalid xmonoPoints");
+        require(input[2] == claimCount[msg.sender], "Invalid xmonoPoints");
 
         uint256 required = nextRequiredSMONO[msg.sender];
         require(balanceOf[msg.sender] >= required, "Insufficient SMONO");
@@ -149,10 +149,12 @@ contract SoloMonopoly {
 
         require(totalAwardedXmonoPoints + pointsToEarn <= totalXmonoSupply, "Exceeds total XMONO supply");
 
+        /*
         // Burn required SMONO tokens
         balanceOf[msg.sender] -= required;
         totalSupply -= required;
         emit Transfer(msg.sender, address(0), required);
+        */
 
         // Award XMONO points
         xmonoPoints[msg.sender] += pointsToEarn;
